@@ -75,7 +75,6 @@ module S3DirectUpload
             ["starts-with", "$key", @options[:key_starts_with]],
             ["starts-with", "$x-requested-with", ""],
             ["content-length-range", @options[:min_file_size], @options[:max_file_size]],
-            ["starts-with","$content-type", @options[:content_type_starts_with] ||""],
             {bucket: @options[:bucket]},
             {acl: @options[:acl]},
             {success_action_status: "201"}
