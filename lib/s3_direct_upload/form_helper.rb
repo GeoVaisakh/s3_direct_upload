@@ -25,7 +25,6 @@ module S3DirectUpload
           ssl: true,
           acl: "public-read",
           expiration: 10.hours.from_now.utc.iso8601,
-          min_file_size: 0,
           max_file_size: 500.megabytes,
           callback_method: "POST",
           callback_param: "file",
@@ -74,7 +73,7 @@ module S3DirectUpload
           conditions: [
             ["starts-with", "$key", @options[:key_starts_with]],
             ["starts-with", "$x-requested-with", ""],
-            ["content-length-range", @options[:min_file_size], @options[:max_file_size]],
+            ["content-length-range", 0, @options[:max_file_size]],
             {bucket: @options[:bucket]},
             {acl: @options[:acl]},
             {success_action_status: "201"}
